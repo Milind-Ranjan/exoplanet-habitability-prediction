@@ -14,15 +14,15 @@ A comprehensive machine learning project that predicts the habitability potentia
 
 ```
 exoplanet-habitability-prediction/
-├── 📊 data/
+├── data/
 │   └── exoplanet.csv           # NASA exoplanet dataset
-├── 📓 notebooks/
+├── notebooks/
 │   ├── EDA.ipynb              # Exploratory Data Analysis
 │   └── Model_Training.ipynb    # Model development and training
-├── 🚀 app/
+├── app/
 │   └── streamlit_app.py       # Interactive web application
-├── 📋 requirements.txt        # Project dependencies
-└── 📖 README.md               # Project documentation
+├── requirements.txt        # Project dependencies
+└── README.md               # Project documentation
 ```
 
 ## ✨ Features
@@ -170,18 +170,6 @@ Our best-performing ensemble model demonstrates:
 | **Recall** | 84.7% | Sensitivity to habitable planets |
 | **F1-Score** | 86.8% | Balanced performance metric |
 | **AUC-ROC** | 0.92 | Excellent class separation |
-
-**🎯 Business Impact**: The model successfully identifies potentially habitable exoplanets, reducing the search space for astronomical observations by 60%.
-
-## 🔮 Future Roadmap
-
-- [ ] **Real-time Data Integration**: NASA Exoplanet Archive API
-- [ ] **Advanced ML Models**: Deep neural networks and transformer architectures
-- [ ] **3D Visualization**: Interactive habitable zone modeling
-- [ ] **Database Integration**: Supabase for scalable data management
-- [ ] **Enhanced UI**: Modern React components with shadcn/ui
-- [ ] **Mobile App**: React Native implementation
-- [ ] **API Development**: RESTful API for external integrations
 
 ## 🧰 Technology Stack
 
