@@ -141,13 +141,13 @@ Our Streamlit application provides an intuitive interface for exoplanet habitabi
 <p><em>Interactive parameter configuration and real-time habitability predictions</em></p>
 </div>
 
-#### 📊 Analytics Dashboard
+#### 🔍 Data Explorer
 <div align="center">
 <img src="images/2.png" alt="Analytics Dashboard" width="800"/>
 <p><em>Comprehensive data visualization and statistical analysis</em></p>
 </div>
 
-#### 🔍 Data Explorer
+#### 📊 Analytics Dashboard
 <div align="center">
 <img src="images/3.png" alt="Data Explorer" width="800"/>
 <p><em>Interactive dataset exploration with advanced filtering capabilities</em></p>
@@ -196,10 +196,6 @@ Our best-performing ensemble model demonstrates:
 ![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=flat&logo=plotly&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=flat&logo=jupyter&logoColor=white)
-
-### Development Tools
-![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=flat&logo=visual-studio-code&logoColor=white)
 
 ### Development Setup
 ```bash
