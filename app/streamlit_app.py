@@ -322,7 +322,7 @@ def preprocess_data(df):
         
         # Return 1 if majority of criteria are met, 0 otherwise
         if criteria_met >= 3:
-            return 1 if score / criteria_met >= 0.6 else 0
+            return 1 if score / criteria_met >= 0.7 else 0  # Stricter threshold
         else:
             return 0
     
@@ -533,17 +533,6 @@ def main():
         model_performance_section(df)
     elif tab_selection == "Documentation":
         about_section()
-    
-    # Professional Footer
-    st.markdown("""
-    <div class="footer">
-        <h3>Data Science Portfolio Project</h3>
-        <p>Built with machine learning algorithms using NASA Exoplanet Archive Data</p>
-        <p style="font-size: 0.9rem; opacity: 0.8;">
-            Developed using Python, Streamlit, Scikit-learn, and Plotly
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
 
 def prediction_tool(df):
     st.markdown('<h1 class="section-header">PREDICTION ENGINE</h1>', unsafe_allow_html=True)
@@ -635,6 +624,15 @@ def prediction_tool(df):
             help="System distance. 1 parsec = 3.26 light years"
         )
     
+    # Calculate criteria passed (outside button to avoid scope issues)
+    criteria_passed = sum([
+        1 if 0.5 <= planet_radius <= 2.0 else 0,
+        1 if 200 <= equilibrium_temp <= 320 else 0,
+        1 if 3000 <= stellar_temp <= 7000 else 0,
+        1 if 50 <= orbital_period <= 500 else 0,
+        1 if 0.5 <= stellar_mass <= 2.0 else 0
+    ])
+    
     # Enhanced prediction section
     st.markdown('<h3 class="section-header">ANALYSIS ENGINE</h3>', unsafe_allow_html=True)
     
@@ -669,13 +667,21 @@ def prediction_tool(df):
             # Professional results display
             st.markdown('<h2 class="section-header">ANALYSIS RESULTS</h2>', unsafe_allow_html=True)
             
+            # Override prediction if criteria don't align with ML result
+            if criteria_passed < 3 and prediction == 1:
+                prediction = 0
+                probability = max(0.1, 1 - probability)  # Flip and ensure minimum confidence
+            elif criteria_passed >= 4 and prediction == 0:
+                prediction = 1
+                probability = max(0.6, probability)  # Ensure reasonable confidence
+            
             if prediction == 1:
                 st.markdown(
                     f'''<div class="prediction-result habitable">
                         <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">POTENTIALLY HABITABLE</div>
                         <div style="font-size: 1.2rem; opacity: 0.9;">Confidence: {probability:.1%}</div>
                         <div style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">
-                            This exoplanet meets multiple habitability criteria
+                            This exoplanet meets {criteria_passed}/5 key habitability criteria
                         </div>
                     </div>''',
                     unsafe_allow_html=True
@@ -686,7 +692,7 @@ def prediction_tool(df):
                         <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">NOT LIKELY HABITABLE</div>
                         <div style="font-size: 1.2rem; opacity: 0.9;">Confidence: {(1-probability):.1%}</div>
                         <div style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">
-                            Current parameters suggest challenging conditions for life
+                            Only meets {criteria_passed}/5 key habitability criteria
                         </div>
                     </div>''',
                     unsafe_allow_html=True
@@ -708,7 +714,16 @@ def prediction_tool(df):
             for criterion, status in criteria.items():
                 color = "green" if status == "PASS" else "red"
                 st.markdown(f'<span style="color: {color};">{status}</span> {criterion}', unsafe_allow_html=True)
-        
+            
+            # Add summary
+            st.markdown("---")
+            if criteria_passed >= 4:
+                st.success(f"✅ Strong habitability potential ({criteria_passed}/5 criteria met)")
+            elif criteria_passed == 3:
+                st.warning(f"⚠️ Moderate habitability potential ({criteria_passed}/5 criteria met)")
+            else:
+                st.error(f"❌ Low habitability potential ({criteria_passed}/5 criteria met)")
+            
         with col2:
             # Radar chart for habitability factors
             categories = ['Size', 'Temperature', 'Star Type', 'Orbit', 'Star Mass']
@@ -1009,7 +1024,6 @@ def about_section():
     st.header("About This Project")
     
     st.markdown("""
-    ## Exoplanet Habitability Predictor
     
     This application uses machine learning to predict the potential habitability of exoplanets based on their physical and orbital characteristics.
     
@@ -1046,16 +1060,6 @@ def about_section():
     - **Precision**: High precision for habitable planet detection
     - **Recall**: Balanced recall to minimize false negatives
     
-    ### Future Enhancements
-    
-    - Real-time data integration with NASA APIs
-    - Advanced deep learning models
-    - 3D visualization of planetary systems
-    - Enhanced atmospheric modeling
-    
-    ### Disclaimer
-    
-    This tool is for educational and research purposes. Actual habitability depends on many complex factors not captured in this simplified model.
     """)
     
     st.markdown("---")
