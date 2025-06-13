@@ -129,6 +129,36 @@ Launch the Streamlit app to:
 - **Visualization**: Plotly for interactive charts
 - **Model Persistence**: Joblib for efficient model serialization
 
+## 📱 Application Screenshots
+
+### Interactive Web Application
+
+Our Streamlit application provides an intuitive interface for exoplanet habitability prediction:
+
+#### 🎯 Prediction Engine
+<div align="center">
+<img src="images/1.png" alt="Prediction Engine Interface" width="800"/>
+<p><em>Interactive parameter configuration and real-time habitability predictions</em></p>
+</div>
+
+#### 📊 Analytics Dashboard
+<div align="center">
+<img src="images/2.png" alt="Analytics Dashboard" width="800"/>
+<p><em>Comprehensive data visualization and statistical analysis</em></p>
+</div>
+
+#### 🔍 Data Explorer
+<div align="center">
+<img src="images/3.png" alt="Data Explorer" width="800"/>
+<p><em>Interactive dataset exploration with advanced filtering capabilities</em></p>
+</div>
+
+#### 🎯 Model Performance Center
+<div align="center">
+<img src="images/4.png" alt="Model Performance Dashboard" width="800"/>
+<p><em>Detailed model metrics, feature importance, and performance comparisons</em></p>
+</div>
+
 ## 📊 Model Performance
 
 Our best-performing ensemble model demonstrates:
